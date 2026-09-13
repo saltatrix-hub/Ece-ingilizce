@@ -774,3 +774,109 @@ html[data-theme="dark"] .question-feedback.unanswered { color: #ffe6ae; backgrou
   .lesson-tabs { display: none !important; }
   .lesson-pane { display: grid !important; }
 }
+
+/* Sade çalışma akışı: bir sonraki ders önde, tüm katalog isteğe bağlı. */
+.sidebar .nav-item:nth-of-type(n+4) { display: none; }
+.top-grid {
+  min-height: 0;
+  grid-template-columns: minmax(0, 1.25fr) minmax(280px, .75fr);
+  margin-bottom: 28px;
+  padding: clamp(28px, 4vw, 50px);
+}
+.title { font-size: clamp(48px, 6vw, 76px); }
+.study-route {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 26px;
+}
+.study-route span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 11px;
+  color: var(--muted);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 82%, transparent);
+  font-size: 12px;
+  font-weight: 750;
+}
+.study-route b {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  color: white;
+  border-radius: 50%;
+  background: var(--brand);
+  font-size: 11px;
+}
+.progress-title::before { content: none; }
+.focus-section {
+  display: grid;
+  grid-template-columns: minmax(240px, .62fr) minmax(320px, 1fr);
+  gap: 28px;
+  align-items: center;
+  margin: 0 0 28px;
+  padding: clamp(22px, 3.5vw, 40px);
+  border: 1px solid var(--line);
+  border-radius: 26px;
+  background: color-mix(in srgb, var(--surface-soft) 68%, var(--surface));
+}
+.focus-copy > span,
+.lesson-library summary small {
+  color: var(--brand);
+  font-size: 11px;
+  font-weight: 850;
+  letter-spacing: .12em;
+}
+.focus-copy h2 { margin: 8px 0; font-size: clamp(28px, 4vw, 44px); line-height: 1.05; letter-spacing: -.045em; }
+.focus-copy p { max-width: 440px; margin: 0; color: var(--muted); }
+.focus-section .lesson-panel { position: relative; top: auto; }
+.workspace { margin-top: 0; }
+.lesson-library {
+  margin-top: 28px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  overflow: clip;
+}
+.lesson-library > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 22px 26px;
+  cursor: pointer;
+  list-style: none;
+}
+.lesson-library > summary::-webkit-details-marker { display: none; }
+.lesson-library summary span { display: grid; gap: 3px; }
+.lesson-library summary strong { font-size: 18px; }
+.lesson-library summary > b { color: var(--brand); font-size: 13px; }
+.lesson-library[open] summary > b { font-size: 0; }
+.lesson-library[open] summary > b::after { content: "Dersleri kapat ↑"; font-size: 13px; }
+.lesson-library .layout { display: block; padding: 0 26px 30px; }
+.lesson-library .toolbar { top: 8px; }
+.lesson-library .cards-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+@media (max-width: 900px) {
+  .focus-section { grid-template-columns: 1fr; }
+  .lesson-library .cards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 720px) {
+  .sidebar .nav-item:nth-of-type(4) { display: none; }
+  .top-grid { grid-template-columns: 1fr; margin-bottom: 18px; }
+  .study-route { gap: 6px; }
+  .study-route span { flex: 1 1 auto; justify-content: center; padding-inline: 8px; font-size: 11px; }
+  .focus-section { gap: 18px; margin-bottom: 18px; padding: 22px 16px; border-radius: 22px; }
+  .lesson-library { margin-top: 18px; }
+  .lesson-library > summary { padding: 19px 18px; }
+  .lesson-library summary > b { max-width: 80px; text-align: right; }
+  .lesson-library .layout { padding: 0 14px 22px; }
+  .lesson-library .cards-grid { grid-template-columns: 1fr; }
+}

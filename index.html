@@ -13,8 +13,8 @@
   <meta property="og:type" content="website" />
   <meta property="og:title" content="English, made easy." />
   <meta property="og:description" content="A0'dan A2'ye 45 yapılandırılmış dersle İngilizce öğren." />
-  <meta property="og:url" content="https://divinazekeriyakoy.com/" />
-  <meta property="og:image" content="https://divinazekeriyakoy.com/assets/og-card-45.png" />
+  <meta property="og:url" content="https://ece.alperensenel.com/" />
+  <meta property="og:image" content="https://ece.alperensenel.com/assets/og-card-45.png" />
   <meta property="og:image:width" content="1693" />
   <meta property="og:image:height" content="929" />
   <style>
@@ -576,9 +576,9 @@
   <div class="app-frame">
     <aside class="sidebar" aria-label="Ana menü">
       <div class="brand-icon" title="Easy English">E.</div>
-      <button class="nav-item active" data-scroll="top"><span class="nav-ico">⌂</span><span class="nav-label">Başlangıç</span></button>
-      <button class="nav-item" data-scroll="levels"><span class="nav-ico">▤</span><span class="nav-label">Dersler</span></button>
-      <button class="nav-item" data-scroll="workspace"><span class="nav-ico">✓</span><span class="nav-label">Çalışma alanı</span></button>
+      <button class="nav-item active" data-scroll="top"><span class="nav-ico">⌂</span><span class="nav-label">Ana Sayfa</span></button>
+      <button class="nav-item" data-scroll="workspace"><span class="nav-ico">♥</span><span class="nav-label">Derse Devam</span></button>
+      <button class="nav-item" data-scroll="levels"><span class="nav-ico">▤</span><span class="nav-label">Tüm Dersler</span></button>
       <button class="nav-item" data-scroll="progress"><span class="nav-ico">◔</span><span class="nav-label">İlerleme</span></button>
       <button class="nav-item" data-scroll="vocab"><span class="nav-ico">Aa</span><span class="nav-label">Kelimeler</span></button>
       <button class="nav-item" id="resetProgress"><span class="nav-ico">↺</span><span class="nav-label">Sıfırla</span></button>
@@ -588,13 +588,14 @@
     <main class="main" id="top">
       <section class="top-grid">
         <div>
-          <div class="eyebrow">A0'DAN A2'YE · 45 ADIM</div>
-          <h1 class="title">English,<br>made easy<span class="spark">.</span><span class="love-spark" aria-hidden="true">♥</span></h1>
-          <p class="subtitle">Kısa anlatımlar, gerçek hayattan örnekler ve bol pratik. Nerede kaldığını düşünmeden, sıradaki küçük adımı tamamla.</p>
+          <div class="eyebrow">ECE'NİN İNGİLİZCE KÖŞESİ · 45 KISA DERS</div>
+          <h1 class="title">Bugün biraz<br>İngilizce<span class="spark">.</span><span class="love-spark" aria-hidden="true">♥</span></h1>
+          <p class="subtitle">Karışıklık yok: kaldığın dersi aç, sırayla öğren–pratik–test adımlarını tamamla. Her gün tek bir küçük adım yeter.</p>
           <div class="hero-actions">
-            <button class="pill-btn" id="readEnglish"><span>▶</span><span>Bugünkü derse başla</span></button>
+            <button class="pill-btn" id="readEnglish"><span>▶</span><span>Kaldığım derse devam et</span></button>
             <input class="student-input" id="studentName" aria-label="Adın" placeholder="Adını yaz" autocomplete="off" />
           </div>
+          <div class="study-route" aria-label="Ders çalışma adımları"><span><b>1</b> Öğren</span><span><b>2</b> Pratik yap</span><span><b>3</b> Testi bitir</span></div>
         </div>
 
         <section class="progress-card" id="progress">
@@ -612,8 +613,17 @@
         </section>
       </section>
 
-      <section class="layout" id="levels">
-        <div>
+      <section class="focus-section" aria-labelledby="focusTitle">
+        <div class="focus-copy"><span>SIRADAKİ KÜÇÜK ADIMIN</span><h2 id="focusTitle">Bugünkü dersin hazır.</h2><p>Önce konuya göz at, sonra pratik yap ve testi tamamla. Hepsi tek ekranda, sırayla.</p></div>
+        <aside class="lesson-panel" id="lessonPanel"></aside>
+      </section>
+
+      <section class="workspace" id="workspace"></section>
+
+      <details class="lesson-library" id="levels">
+        <summary><span><small>DERS KÜTÜPHANESİ</small><strong>Tüm 45 dersi görüntüle</strong></span><b>Dersleri aç ↓</b></summary>
+        <div class="layout">
+          <div>
           <div class="toolbar">
             <div class="search-wrap"><span aria-hidden="true">⌕</span><input class="search" id="search" aria-label="Ders, konu veya kelime ara" placeholder="Ders, konu veya kelime ara..." /></div>
             <div class="mini-actions">
@@ -623,10 +633,8 @@
           </div>
           <div id="levelSections"></div>
         </div>
-        <aside class="lesson-panel" id="lessonPanel"></aside>
-      </section>
-
-      <section class="workspace" id="workspace"></section>
+        </div>
+      </details>
     </main>
   </div>
   <div class="toast" id="toast"></div>
@@ -8184,6 +8192,7 @@ const COURSE = [
       activeLessonTab = "learn";
       saveState();
       renderAll();
+      document.getElementById("lessonPanel").scrollIntoView({ behavior:"smooth", block:"center" });
     }
     function startLesson(){
       const lesson = getCurrentLesson();
@@ -8361,7 +8370,7 @@ const COURSE = [
         activeLessonTab = "learn";
         saveState();
         renderAll();
-        document.getElementById("levels").scrollIntoView({ behavior:"smooth", block:"start" });
+        document.getElementById("lessonPanel").scrollIntoView({ behavior:"smooth", block:"center" });
       } else if (currentId >= COURSE.length) {
         showToast("Tüm seviyeler tamamlandı.", "ok");
       } else {
